@@ -200,7 +200,7 @@ export default function Home() {
             fontFamily:'Poppins',
              bgcolor:"#6F9DFF"
            }}>
-            Send
+            <Avatar  src="/send.png" alt="send"/>
           </Button>
         </Stack>
       </Stack>
