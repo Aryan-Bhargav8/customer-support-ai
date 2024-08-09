@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Button, Stack, TextField,Avatar,IconButton } from '@mui/material';
+import { Box, Button, Stack, TextField, Avatar, IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
 import { useState } from 'react';
@@ -54,6 +54,7 @@ export default function Home() {
     )
   })
   }
+
   const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
       backgroundColor: '#44b700',
@@ -82,12 +83,13 @@ export default function Home() {
       },
     },
   }));
-  
+
   const SmallAvatar = styled(Avatar)(({ theme }) => ({
     width: 22,
     height: 22,
     border: `2px solid ${theme.palette.background.paper}`,
   }));
+
   return (
     <Box
       width="100vw"
@@ -98,52 +100,54 @@ export default function Home() {
       alignItems="center"
       sx={{
         backgroundImage: 'url(1.gif)',
-        backgroundPosition: 'center', 
+        backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        backgroundSize:'cover',
+        backgroundSize: 'cover',
+        padding: '20px', // Added padding for mobile devices
       }}
-
-    
     >
       <Stack
-        direction={"column"}
-        width="500px"
+        direction="column"
+        width={{ xs: '100%', sm: '500px' }} // Responsive width
         height="700px"
-        borderRadius={10} 
+        borderRadius={10}
         boxShadow={2}
-        border="1px  solid #dedeed "
+        border="1px solid #dedeed"
         p={2}
         spacing={3}
-        sx={
-          {
-            fontFamily:'Poppins',
-              mt: 2,
-              backgroundColor: '  #dedeed',
-          }
-        }
-      ><Box sx={{ display: 'flex', alignItems: 'center',  }}>
-        <StyledBadge
-          overlap="circular"
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-         variant="dot"
-        >
-         <Avatar alt="logo" src="/logo.jpg"  sx={{ width: 56, height: 56 }} />
-        </StyledBadge>
-      <IconButton
-        edge="start"
-        color="inherit"
-        aria-label="logo"
-        sx={{ mr: 2 ,fontFamily: 'poppins',padding:"20px"}}
-      > SupportIQ
-      </IconButton>
-      </Box>
+        sx={{
+          fontFamily: 'Poppins',
+          mt: 2,
+          backgroundColor: '#dedeed',
+        }}
+      >
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <StyledBadge
+            overlap="circular"
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+            variant="dot"
+          >
+            <Avatar alt="logo" src="/logo.jpg" sx={{ width: 56, height: 56 }} />
+          </StyledBadge>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="logo"
+            sx={{
+              mr: 2,
+              fontFamily: 'Poppins',
+              padding: { xs: '10px', sm: '20px' }, // Responsive padding
+            }}
+          >
+            SupportIQ
+          </IconButton>
+        </Box>
         <Stack
-          direction={"column"}
+          direction="column"
           spacing={2}
           flexGrow={1}
           overflow="auto"
           maxHeight="100%"
-          
         >
           {messages.map((message, index) => (
             <Box
@@ -152,8 +156,6 @@ export default function Home() {
               justifyContent={
                 message.role === 'assistant' ? 'flex-start' : 'flex-end'
               }
-              
-              
             >
               <Box
                 bgcolor={
@@ -162,48 +164,45 @@ export default function Home() {
                 color="white"
                 borderRadius={8}
                 p={3}
-                sx={
-                  {
-                    fontFamily:'Poppins',
-                  }
-                }
+                sx={{
+                  fontFamily: 'Poppins',
+                  fontSize: { xs: '14px', sm: '16px' }, // Responsive font size
+                }}
               >
                 {message.content}
               </Box>
             </Box>
           ))}
         </Stack>
-        <Stack
-          direction={"row"}
-          spacing={2}
-        >
-          <TextField 
+        <Stack direction="row" spacing={2}>
+          <TextField
             label="Enter your doubts here..."
             fullWidth
-            variant='filled'
+            variant="filled"
             sx={{
               bgcolor: 'white',
               borderRadius: 5,
-              fontFamily:'Poppins',
-              
-              
-              
+              fontFamily: 'Poppins',
+              fontSize: { xs: '14px', sm: '16px' }, // Responsive font size
             }}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
           <Button
-           variant="contained" 
-           onClick={sendMessage}
-           sx={{
-            borderRadius: 6,
-            fontFamily:'Poppins',
-             bgcolor:"#6F9DFF"
-           }}>
-            <Avatar  src="/send.png" alt="send"/>
+            variant="contained"
+            onClick={sendMessage}
+            sx={{
+              borderRadius: 6,
+              fontFamily: 'Poppins',
+              bgcolor: "#6F9DFF",
+              padding: { xs: '8px', sm: '12px' }, // Responsive padding
+              minWidth: '50px',
+            }}
+          >
+            <Avatar src="/send.png" alt="send" sx={{ width: 24, height: 24 }} />
           </Button>
         </Stack>
       </Stack>
     </Box>
-  )
+  );
 }
