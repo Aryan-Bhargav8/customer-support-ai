@@ -64,8 +64,9 @@ export default function LandingPage() {
           <Typography variant="h3"  mb={2} sx={{ fontWeight: 'bold', textAlign: 'center',fontFamily:'Poppins' ,color:'#D9D9D9' }}>
           your all-knowing, always-on digital assistant!
           </Typography>
+
           <Typography variant="h6" mb={4} sx={{ fontWeight: 'bold',textAlign: 'center' ,fontFamily:'Poppins',  color:'#D9D9D9'}}>
-          Think of me as your personal helper, designed to make your customer service experience seamless and efficient. Whether it’s day or night, I’m here to ensure you get the support you needs swiftly and effortlessly.
+          We are thrilled to assist you in navigating our platform, where AI technology meets the world of software engineering interviews. Whether you're a candidate preparing for your next role or a recruiter seeking top talent, Headstarter AI Support is here to ensure a seamless experience.
           </Typography>
           <Button
             variant="contained"
@@ -87,7 +88,7 @@ export default function LandingPage() {
               display: 'block',
             }}
           >
-            Let's get started !
+            Let&apos;s get started !
           </Button>
         </Box>
 
