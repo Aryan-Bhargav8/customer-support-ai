@@ -2,7 +2,7 @@
 
 'use client';
 
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button ,AppBar,Toolbar,IconButton,Avatar} from '@mui/material';
 import { useRouter } from 'next/navigation';
 
 export default function LandingPage() {
@@ -25,7 +25,20 @@ export default function LandingPage() {
         fontFamily: 'poppins',
          }}
     >
-   
+      <AppBar position="static" sx={{ backgroundColor: '#020929', padding: '10px 20px' }}>
+      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+      <Avatar  src="/logo.jpg" alt="logo" sx={{ width: 56, height: 56 }}/>
+      <IconButton
+        edge="start"
+        color="inherit"
+        aria-label="logo"
+        sx={{ mr: 2 ,fontFamily: 'poppins',padding:"20px"}}
+      > SupportIQ
+      </IconButton>
+      </Box>
+      </Toolbar>
+      </AppBar>
 
       <Box
         width="100vw"
@@ -43,17 +56,17 @@ export default function LandingPage() {
           }}
        
       >
+        
         <Box display="flex" flexDirection="column" alignItems="center" mb={4} p={4}  spacing={2}   borderRadius={10} >
           <Typography variant="h2"  mb={2} sx={{ fontWeight: 'bold', textAlign: 'center',fontFamily:'Poppins', color:'#D9D9D9' }}>
-          Welcome to Headstarter AI Support: 
+          Welcome to SupportIQ: 
           </Typography>
           <Typography variant="h3"  mb={2} sx={{ fontWeight: 'bold', textAlign: 'center',fontFamily:'Poppins' ,color:'#D9D9D9' }}>
-          Your Partner in AI-Powered Interviews for Software Engineering Jobs!
+          your all-knowing, always-on digital assistant!
           </Typography>
 
           <Typography variant="h6" mb={4} sx={{ fontWeight: 'bold',textAlign: 'center' ,fontFamily:'Poppins',  color:'#D9D9D9'}}>
-          We are thrilled to assist you in navigating our platform, where AI technology meets the world of software engineering interviews. Whether you are a candidate preparing for your next role or a recruiter seeking top talent, Headstarter AI Support is here to ensure a seamless experience.
-
+            Think of me as your personal helper,designed to make your customer service experience seamless and efficient. Whether it's day or night .I'am here to ensure you get the support you need .
           </Typography>
           <Button
             variant="contained"
