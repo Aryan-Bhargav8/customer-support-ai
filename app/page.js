@@ -66,7 +66,7 @@ export default function LandingPage() {
           </Typography>
 
           <Typography variant="h6" mb={4} sx={{ fontWeight: 'bold',textAlign: 'center' ,fontFamily:'Poppins',  color:'#D9D9D9'}}>
-            Think of me as your personal helper,designed to make your customer service experience seamless and efficient. Whether it's day or night .I'am here to ensure you get the support you need .
+            Think of me as your personal helper,designed to make your customer service experience seamless and efficient. Whether it&apos;s day or night .I am here to ensure you get the support you need .
           </Typography>
           <Button
             variant="contained"
