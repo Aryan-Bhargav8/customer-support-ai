@@ -50,8 +50,10 @@ export default function LandingPage() {
           <Typography variant="h3"  mb={2} sx={{ fontWeight: 'bold', textAlign: 'center',fontFamily:'Poppins' ,color:'#D9D9D9' }}>
           Your Partner in AI-Powered Interviews for Software Engineering Jobs!
           </Typography>
+
           <Typography variant="h6" mb={4} sx={{ fontWeight: 'bold',textAlign: 'center' ,fontFamily:'Poppins',  color:'#D9D9D9'}}>
-          We are thrilled to assist you in navigating our platform, where AI technology meets the world of software engineering interviews. Whether you're a candidate preparing for your next role or a recruiter seeking top talent, Headstarter AI Support is here to ensure a seamless experience.
+          We are thrilled to assist you in navigating our platform, where AI technology meets the world of software engineering interviews. Whether you are a candidate preparing for your next role or a recruiter seeking top talent, Headstarter AI Support is here to ensure a seamless experience.
+
           </Typography>
           <Button
             variant="contained"
@@ -73,7 +75,7 @@ export default function LandingPage() {
               display: 'block',
             }}
           >
-            Let's get started !
+            Let&apos;s get started !
           </Button>
         </Box>
 
