@@ -76,14 +76,14 @@ export default function Home() {
         height="700px"
         borderRadius={10} 
         boxShadow={2}
-        border="1px  solid #ccc "
+        border="1px  solid #1A1A2E "
         p={2}
         spacing={3}
         sx={
           {
-            fontFamily:'roboto',
+            fontFamily:'Poppins',
               mt: 2,
-              backgroundColor: '#d1e0e0',
+              backgroundColor: '  #1A1A2E',
           }
         }
       >
@@ -93,6 +93,7 @@ export default function Home() {
           flexGrow={1}
           overflow="auto"
           maxHeight="100%"
+          
         >
           {messages.map((message, index) => (
             <Box
@@ -101,7 +102,8 @@ export default function Home() {
               justifyContent={
                 message.role === 'assistant' ? 'flex-start' : 'flex-end'
               }
-             
+              
+              
             >
               <Box
                 bgcolor={
@@ -112,7 +114,7 @@ export default function Home() {
                 p={3}
                 sx={
                   {
-                    fontFamily:'roboto',
+                    fontFamily:'Poppins',
                   }
                 }
               >
@@ -131,9 +133,10 @@ export default function Home() {
             variant='filled'
             sx={{
               bgcolor: 'white',
-              borderRadius: 1,
-              fontFamily:'roboto',
+              borderRadius: 5,
+              fontFamily:'Poppins',
               boxShadow :2
+              
               
             }}
             value={message}
@@ -144,7 +147,8 @@ export default function Home() {
            onClick={sendMessage}
            sx={{
             borderRadius: 6,
-            fontFamily:'roboto',
+            fontFamily:'Poppins',
+             bgcolor:"#6F9DFF"
            }}>
             Send
           </Button>
