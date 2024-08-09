@@ -177,21 +177,17 @@ export default function Home() {
           direction={"row"}
           spacing={2}
         >
-          <TextField 
-            label="Enter your doubts here..."
-            fullWidth
-            variant='filled'
-            sx={{
+              <TextField id="standard-basic" label="Enter your doubts here..." variant="standard" 
+                fullWidth 
+               value={message}
+               onChange={(e) => setMessage(e.target.value)}
+               sx={{
               bgcolor: 'white',
               borderRadius: 5,
               fontFamily:'Poppins',
-              
-              
-              
-            }}
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-          />
+              }}
+            />
+        
           <Button
            variant="contained" 
            onClick={sendMessage}
