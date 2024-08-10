@@ -181,13 +181,11 @@ export default function Home() {
           <TextField 
             label="Enter your doubts here..."
             fullWidth
-            variant='filled'
+            variant='standard'
             sx={{
               bgcolor: 'white',
               borderRadius: 5,
               fontFamily:'Poppins',
-              
-              
               
             }}
             value={message}
