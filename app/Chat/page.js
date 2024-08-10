@@ -181,12 +181,16 @@ export default function Home() {
           <TextField 
             label="Enter your doubts here..."
             fullWidth
-            variant='standard'
+            variant='outlined'
             sx={{
               bgcolor: 'white',
-              borderRadius: 5,
               fontFamily:'Poppins',
+              flexGrow: 1, 
+              borderRadius: '24px',
               
+            }}
+            InputProps={{
+              style: { borderRadius: '24px' },
             }}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
