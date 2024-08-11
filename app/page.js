@@ -125,7 +125,7 @@ export default function LandingPage() {
               fontWeight: 'bold',
               textAlign: 'center',
               fontFamily: 'Poppins',
-              color: '#8bfcf5',
+              color: '#43002c',
               textShadow: '3px 5px 1px #cc0c9c',
               fontSize: { xs: '1.75rem', md: '2.5rem' },
             }}
@@ -139,8 +139,8 @@ export default function LandingPage() {
               fontWeight: 'bold',
               textAlign: 'center',
               fontFamily: 'Poppins',
-              color: '#8bfcf5',
-              textShadow: '3px 5px 1px #cc0c9c',
+              color: '#43002c',
+             
               fontSize: { xs: '1.5rem', md: '2rem' },
             }}
           >
@@ -154,9 +154,9 @@ export default function LandingPage() {
               fontWeight: 'bold',
               textAlign: 'center',
               fontFamily: 'Poppins',
-              color: '#8bfcf5',
+              color: '#43002c',
               fontSize: { xs: '1rem', md: '1.5rem' },
-              textShadow: '3px 5px 1px #cc0c9c',
+              
             }}
           >
             Think of me as your personal helper,
