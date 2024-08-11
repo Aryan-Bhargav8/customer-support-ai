@@ -2,21 +2,39 @@
 
 import { Box, Typography, Button, AppBar, Toolbar, IconButton, Avatar } from '@mui/material';
 
-import { signInWithGoogle } from "../firebase";
+import { signInWithGoogle, auth } from "../firebase";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
 
 
 export default function LandingPage() {
   const router = useRouter();
+  const [loading, setLoading] = useState(true); // State to handle loading
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        router.push('/Chat'); // Redirect to chat if already authenticated
+      } else {
+        setLoading(false); // Set loading to false if not authenticated
+      }
+    });
+
+    return () => unsubscribe(); // Cleanup subscription on component unmount
+  }, [router]);
 
   const handleGoogleSignIn = async () => {
     try {
       await signInWithGoogle();
-      router.push('/Chat');  // Redirect to chat after successful login
     } catch (error) {
       console.error("Error signing in with Google: ", error);
     }
   };
+
+  if (loading) {
+    return <Typography>Loading...</Typography>; // Display loading state while checking authentication
+  }
 
   return (
     <Box

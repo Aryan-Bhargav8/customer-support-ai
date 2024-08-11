@@ -1,6 +1,5 @@
-// firebase.js
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
 
 // Your Firebase configuration object
 const firebaseConfig = {
@@ -22,6 +21,7 @@ export const signInWithGoogle = async () => {
     await signInWithPopup(auth, provider);
   } catch (error) {
     console.error("Error during Google sign-in: ", error);
+    throw error; // Re-throw the error to handle it in the calling function
   }
 };
 
@@ -32,3 +32,6 @@ export const signOutUser = async () => {
     console.error("Error signing out: ", error);
   }
 };
+
+// Export auth and onAuthStateChanged to check the authentication state
+export { auth, onAuthStateChanged };

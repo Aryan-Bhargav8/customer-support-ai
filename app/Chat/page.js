@@ -3,11 +3,12 @@
 import { Box, Button, Stack, TextField, Avatar, IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
-import { useState } from 'react';
-import { signOutUser } from "../../firebase";
+import { useState, useEffect } from 'react';
+import { signOutUser, auth } from "../../firebase";
 import { useRouter } from 'next/navigation';
+import { onAuthStateChanged } from "firebase/auth";
 
-export default function Home() {
+export default function ChatPage() {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
@@ -17,46 +18,56 @@ export default function Home() {
   const [message, setMessage] = useState('');
   const router = useRouter();
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        router.push('/'); // Redirect to home if not authenticated
+      }
+    });
+
+    return () => unsubscribe(); // Cleanup subscription on component unmount
+  }, [router]);
+
   const sendMessage = async () => {
     setMessage(''); // Clear the input field
     setMessages((messages) => [
       ...messages,
       { role: 'user', content: message }, // Add the user message
       { role: 'assistant', content: ''}, // Add the assistant message placeholder
-    ] )
+    ]);
 
     // Call the API to get the assistant's response
-    const response = fetch('/api/chat' , {
+    const response = fetch('/api/chat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify([...messages, { role: 'user', content: message }]),
-  }).then(async(res)=>{
-    const reader = res.body.getReader(); // get reader to read the response body
-    const decoder = new TextDecoder(); // create a new text decoder to decode the response text
+    }).then(async(res) => {
+      const reader = res.body.getReader(); // get reader to read the response body
+      const decoder = new TextDecoder(); // create a new text decoder to decode the response text
 
-    let result = '';
-    // Function to process the text from the response
-    return reader.read().then(
-      function processText({done , value}){
-        if(done){
-          return result;
+      let result = '';
+      // Function to process the text from the response
+      return reader.read().then(
+        function processText({ done, value }) {
+          if (done) {
+            return result;
+          }
+          const text = decoder.decode(value || new Uint8Array(), { stream: true }); // decode the text
+          setMessages((messages) => {
+            let lastMessage = messages[messages.length - 1]; // get the last message (assistant message placeholder)
+            let otherMessages = messages.slice(0, messages.length - 1); // get all the other messages
+            return [
+              ...otherMessages,
+              { ...lastMessage, content: lastMessage.content + text }, // update the last message with the new text from the response body, that is the assistant's message
+            ];
+          });
+          return reader.read().then(processText); // read the next chunk of response body and process the text
         }
-        const text = decoder.decode(value || new Uint8Array() , {stream: true}); // decode the text
-        setMessages((messages) => {
-          let lastMessage = messages[messages.length - 1]; // get the last message (assistant message placeholder)
-          let otherMessages = messages.slice(0, messages.length - 1); // get all the other messages
-          return [
-            ...otherMessages,
-            { ...lastMessage, content: lastMessage.content + text }, // update the last message with the new text from the response body, that is the assistant's message
-          ]
-        })
-        return reader.read().then(processText); // read the next chunk of response body and process the text
-      }
-    )
-  })
-  }
+      );
+    });
+  };
 
   const handleLogout = async () => {
     try {
@@ -66,7 +77,6 @@ export default function Home() {
       console.error("Error signing out: ", error);
     }
   };
-
   const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
       backgroundColor: '#44b700',
