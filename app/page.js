@@ -130,11 +130,9 @@ export default function LandingPage() {
         {/* Button */}
         <Box
           sx={{
+            border: '0.5px solid black',
             borderRadius: '20px',
             backgroundColor: '#6F9DFF',
-            '&:hover': {
-              backgroundColor: '#9980ff',
-            },
           }}
         >
           <Button
@@ -149,10 +147,12 @@ export default function LandingPage() {
               position: 'relative',
               bottom: '5px',
               padding: { xs: '8px 16px', md: '10px 20px' }, // Responsive padding
+              border: '0.5px solid black',
               borderRadius: '20px',
               fontSize: { xs: '16px', md: '20px' }, // Responsive font size
               fontWeight: 'bold',
               display: 'block',
+              boxShadow: '0px 4px 4px transparent',
               transition: 'bottom 0.3s ease-in-out',
 
               '&:hover': {
