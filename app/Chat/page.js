@@ -4,15 +4,18 @@ import { Box, Button, Stack, TextField, Avatar, IconButton } from '@mui/material
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
 import { useState } from 'react';
+import { signOutUser } from "../../firebase";
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: "Hi! I'm SupportIQ . How can I help you today?",
+      content: "Hi! I'm SupportIQ. How can I help you today?",
     },
   ]);
   const [message, setMessage] = useState('');
+  const router = useRouter();
 
   const sendMessage = async () => {
     setMessage(''); // Clear the input field
@@ -30,7 +33,7 @@ export default function Home() {
       },
       body: JSON.stringify([...messages, { role: 'user', content: message }]),
   }).then(async(res)=>{
-    const reader = res.body.getReader();// get reader to read the response body
+    const reader = res.body.getReader(); // get reader to read the response body
     const decoder = new TextDecoder(); // create a new text decoder to decode the response text
 
     let result = '';
@@ -40,13 +43,13 @@ export default function Home() {
         if(done){
           return result;
         }
-        const text = decoder.decode(value || new Uint8Array() , {stream: true});// decode the text
+        const text = decoder.decode(value || new Uint8Array() , {stream: true}); // decode the text
         setMessages((messages) => {
-          let lastMessage = messages[messages.length - 1];// get the last message(assistant message placeholder)
-          let otherMessages = messages.slice(0, messages.length - 1);// get all the other messages
+          let lastMessage = messages[messages.length - 1]; // get the last message (assistant message placeholder)
+          let otherMessages = messages.slice(0, messages.length - 1); // get all the other messages
           return [
             ...otherMessages,
-            { ...lastMessage, content: lastMessage.content + text },// update the last message with the new text from the response body,that is the assistant's message
+            { ...lastMessage, content: lastMessage.content + text }, // update the last message with the new text from the response body, that is the assistant's message
           ]
         })
         return reader.read().then(processText); // read the next chunk of response body and process the text
@@ -54,6 +57,15 @@ export default function Home() {
     )
   })
   }
+
+  const handleLogout = async () => {
+    try {
+      await signOutUser();
+      router.push('/'); // Redirect to home or login page after logout
+    } catch (error) {
+      console.error("Error signing out: ", error);
+    }
+  };
 
   const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -119,28 +131,49 @@ export default function Home() {
           fontFamily: 'Poppins',
           mt: 2,
           backgroundColor: '#dedeed',
+          position: 'relative', // Make sure the button is positioned correctly
         }}
       >
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <StyledBadge
-            overlap="circular"
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-            variant="dot"
-          >
-            <Avatar alt="logo" src="/logo.jpg" sx={{ width: 56, height: 56 }} />
-          </StyledBadge>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="logo"
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            mb: 2,
+          }}
+        >
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <StyledBadge
+              overlap="circular"
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+              variant="dot"
+            >
+              <Avatar alt="logo" src="/logo.jpg" sx={{ width: 56, height: 56 }} />
+            </StyledBadge>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="logo"
+              sx={{
+                mr: 2,
+                fontFamily: 'Poppins',
+                padding: { xs: '10px', sm: '20px' }, // Responsive padding
+              }}
+            >
+              SupportIQ
+            </IconButton>
+          </Box>
+          <Button
+            variant="outlined"
+            color="error"
+            onClick={handleLogout}
             sx={{
-              mr: 2,
               fontFamily: 'Poppins',
-              padding: { xs: '10px', sm: '20px' }, // Responsive padding
+              textTransform: 'none',
             }}
           >
-            SupportIQ
-          </IconButton>
+            Logout
+          </Button>
         </Box>
         <Stack
           direction="column"

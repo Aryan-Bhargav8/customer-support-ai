@@ -1,13 +1,21 @@
 'use client';
 
 import { Box, Typography, Button, AppBar, Toolbar, IconButton, Avatar } from '@mui/material';
-import { useRouter } from 'next/navigation';
+
+import { signInWithGoogle } from "../firebase";
+import { useRouter } from "next/navigation";
+
 
 export default function LandingPage() {
   const router = useRouter();
 
-  const handleGetStarted = () => {
-    router.push('/Chat');
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      router.push('/Chat');  // Redirect to chat after successful login
+    } catch (error) {
+      console.error("Error signing in with Google: ", error);
+    }
   };
 
   return (
@@ -141,7 +149,7 @@ export default function LandingPage() {
             variant="contained"
             color="success"
             size="large"
-            onClick={handleGetStarted}
+            onClick={handleGoogleSignIn}
             sx={{
               fontFamily: 'Quicksand',
               backgroundColor: '#6F9DFF',
