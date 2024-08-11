@@ -3,9 +3,16 @@
 import { Box, Button, Stack, TextField, Avatar, IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
-import { useState } from 'react';
+import { useState ,useEffect, useRef } from 'react';
 import { signOutUser } from "../../firebase";
 import { useRouter } from 'next/navigation';
+import MarkdownIt from 'markdown-it';
+
+const md = new MarkdownIt({
+  html: true, // Enable HTML tags in source
+  linkify: true, // Autoconvert URL-like text to links
+  typographer: true, // Enable some language-neutral replacement + quotes beautification
+});
 
 export default function Home() {
   const [messages, setMessages] = useState([
@@ -15,47 +22,72 @@ export default function Home() {
     },
   ]);
   const [message, setMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const sendMessage = async () => {
+    if (!message.trim() || isLoading) return;
+    setIsLoading(true)  // Don't send empty messages
+
     setMessage(''); // Clear the input field
     setMessages((messages) => [
       ...messages,
       { role: 'user', content: message }, // Add the user message
-      { role: 'assistant', content: ''}, // Add the assistant message placeholder
-    ] )
+      { role: 'assistant', content: '' }, // Add the assistant message placeholder
+    ]);
 
     // Call the API to get the assistant's response
-    const response = fetch('/api/chat' , {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify([...messages, { role: 'user', content: message }]),
-  }).then(async(res)=>{
-    const reader = res.body.getReader(); // get reader to read the response body
-    const decoder = new TextDecoder(); // create a new text decoder to decode the response text
-
-    let result = '';
-    // Function to process the text from the response
-    return reader.read().then(
-      function processText({done , value}){
-        if(done){
+    try{
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify([...messages, { role: 'user', content: message }]),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok')
+      }
+      
+      const reader = response.body.getReader(); // Get reader to read the response body
+      const decoder = new TextDecoder(); // Create a new text decoder to decode the response text
+  
+      let result = '';
+      // Function to process the text from the response
+      const processText = async ({ done, value }) => {
+        if (done) {
           return result;
         }
-        const text = decoder.decode(value || new Uint8Array() , {stream: true}); // decode the text
+        const text = decoder.decode(value || new Uint8Array(), { stream: true }); // Decode the text
         setMessages((messages) => {
-          let lastMessage = messages[messages.length - 1]; // get the last message (assistant message placeholder)
-          let otherMessages = messages.slice(0, messages.length - 1); // get all the other messages
+          let lastMessage = messages[messages.length - 1]; // Get the last message (assistant message placeholder)
+          let otherMessages = messages.slice(0, messages.length - 1); // Get all the other messages
           return [
             ...otherMessages,
-            { ...lastMessage, content: lastMessage.content + text }, // update the last message with the new text from the response body, that is the assistant's message
-          ]
-        })
-        return reader.read().then(processText); // read the next chunk of response body and process the text
-      }
-    )
-  })
+            { ...lastMessage, content: lastMessage.content + text }, // Update the last message with the new text from the response body, that is the assistant's message
+          ];
+        });
+        result += text;
+        return reader.read().then(processText); // Read the next chunk of response body and process the text
+      };
+  
+      await reader.read().then(processText);
+    }catch(error){
+      console.error('Error:', error)
+    setMessages((messages) => [
+      ...messages,
+      { role: 'assistant', content: "I'm sorry, but I encountered an error. Please try again later." },
+    ])
+    }
+    setIsLoading(false)
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault()
+      sendMessage()
+    }
   }
 
   const handleLogout = async () => {
@@ -63,7 +95,7 @@ export default function Home() {
       await signOutUser();
       router.push('/'); // Redirect to home or login page after logout
     } catch (error) {
-      console.error("Error signing out: ", error);
+      console.error('Error signing out: ', error);
     }
   };
 
@@ -101,6 +133,17 @@ export default function Home() {
     height: 22,
     border: `2px solid ${theme.palette.background.paper}`,
   }));
+
+
+  // AutoScrolling Messages 
+  const messagesEndRef = useRef(null);
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
+  
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages]);
 
   return (
     <Box
@@ -201,40 +244,41 @@ export default function Home() {
                   fontFamily: 'Poppins',
                   fontSize: { xs: '14px', sm: '16px' }, // Responsive font size
                 }}
-              >
-                {message.content}
-              </Box>
+                dangerouslySetInnerHTML={{
+                  __html : md.render(message.content), // Parse and render Markdown as HTML
+                }}
+              />
             </Box>
-          ))}
+          ))} 
+          <div ref={messagesEndRef} /> {/* AutoScrolling Messages */}
         </Stack>
-        <Stack
-          direction={"row"}
-          spacing={2}
-        >
-          <TextField 
+        <Stack direction={"row"} spacing={2}>
+          <TextField
             label="Enter your doubts here..."
             fullWidth
-            variant='outlined'
+            variant="outlined"
             sx={{
               bgcolor: 'white',
-              fontFamily:'Poppins',
-              flexGrow: 1, 
+              fontFamily: 'Poppins',
+              flexGrow: 1,
               borderRadius: '24px',
-              
             }}
             InputProps={{
               style: { borderRadius: '24px' },
             }}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={handleKeyPress}
+            disabled={isLoading}
           />
           <Button
             variant="contained"
             onClick={sendMessage}
+            disabled={isLoading}
             sx={{
               borderRadius: 6,
               fontFamily: 'Poppins',
-              bgcolor: "#6F9DFF",
+              bgcolor: '#6F9DFF',
               padding: { xs: '8px', sm: '12px' }, // Responsive padding
               minWidth: '50px',
             }}
