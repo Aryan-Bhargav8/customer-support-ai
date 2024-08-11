@@ -271,7 +271,17 @@ export default function Home() {
             onKeyDown={handleKeyPress}
             disabled={isLoading}
           />
-          <Button
+          <Box
+           sx={{
+            borderRadius: 6,
+            fontFamily: 'Poppins',
+            bgcolor: '#6F9DFF',
+            border: '1px solid black',
+            '&:hover': {
+                backgroundColor: '#9980ff',
+              }
+            }}>
+            <Button
             variant="contained"
             onClick={sendMessage}
             disabled={isLoading}
@@ -281,10 +291,23 @@ export default function Home() {
               bgcolor: '#6F9DFF',
               padding: { xs: '8px', sm: '12px' }, // Responsive padding
               minWidth: '50px',
+              bottom: '5px',
+              border: '0.5px solid black',
+              boxShadow: '0px 1px 1px transparent',
+              transition: 'bottom 0.2s ease-in-out',
+              '&:hover': {
+                backgroundColor: '#9980ff',
+                bottom: '0px',
+                color: '#efd7fa',
+              },
+              ':active': {
+                bottom: '-2px',
+              },
             }}
           >
             <Avatar src="/send.png" alt="send" sx={{ width: 24, height: 24 }} />
           </Button>
+          </Box>
         </Stack>
       </Stack>
     </Box>

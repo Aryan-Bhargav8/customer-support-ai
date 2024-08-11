@@ -74,7 +74,7 @@ export default function LandingPage() {
                 SupportIQ
               </IconButton>
             </Box>
-            <Box sx={{  position: 'absolute', top: 20, right: 20, display: 'flex', alignItems: 'center' }}>
+            <Box sx={{  position: 'absolute', top: 20, right: 20, display: 'flex', alignItems: 'center' ,bgcolor:'#6F9DFF', borderRadius:'20px'}}>
             <Button
             variant="contained"
             color="success"
@@ -83,15 +83,21 @@ export default function LandingPage() {
             sx={{
               fontFamily: 'Quicksand',
               backgroundColor: '#6F9DFF',
-              color: 'black',
+              color: '#c0fcf8',
               position: 'relative',
               bottom: '5px',
-
+              border: '0.5px solid black',
+              boxShadow: '0px 4px 4px transparent',
+              transition: 'bottom 0.2s ease-in-out',
               '&:hover': {
                 backgroundColor: '#9980ff',
                 bottom: '0px',
+                color: '#efd7fa',
               },
-              padding: '10px 20px',
+              ':active': {
+                bottom: '-2px',
+              },
+              padding: '5px 10px',
               borderRadius: '20px',
               fontSize: '20px',
               fontWeight: 'bold',
@@ -193,7 +199,7 @@ export default function LandingPage() {
               fontWeight: 'bold',
               display: 'block',
               boxShadow: '0px 4px 4px transparent',
-              transition: 'bottom 0.3s ease-in-out',
+              transition: 'bottom 0.2s ease-in-out',
 
               '&:hover': {
                 backgroundColor: '#9980ff',
