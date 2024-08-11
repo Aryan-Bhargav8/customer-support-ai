@@ -17,6 +17,10 @@ export default function LandingPage() {
       console.error("Error signing in with Google: ", error);
     }
   };
+  const handleGetStarted = () => {
+    router.push('/Chat');
+  };
+
 
   return (
     <Box
@@ -70,7 +74,34 @@ export default function LandingPage() {
                 SupportIQ
               </IconButton>
             </Box>
-           
+            <Box sx={{  position: 'absolute', top: 20, right: 20, display: 'flex', alignItems: 'center' }}>
+            <Button
+            variant="contained"
+            color="success"
+            size="large"
+            onClick={handleGoogleSignIn}
+            sx={{
+              fontFamily: 'Quicksand',
+              backgroundColor: '#6F9DFF',
+              color: 'black',
+              position: 'relative',
+              bottom: '5px',
+
+              '&:hover': {
+                backgroundColor: '#9980ff',
+                bottom: '0px',
+              },
+              padding: '10px 20px',
+              borderRadius: '20px',
+              fontSize: '20px',
+              fontWeight: 'bold',
+              display: 'block',
+            }}
+          >
+            sign in 
+          </Button>
+       
+            </Box>
           </Toolbar>
         </AppBar>
 
@@ -148,7 +179,7 @@ export default function LandingPage() {
             variant="contained"
             color="success"
             size="large"
-            onClick={handleGoogleSignIn}
+            onClick={handleGetStarted}
             sx={{
               fontFamily: 'Quicksand',
               backgroundColor: '#6F9DFF',
