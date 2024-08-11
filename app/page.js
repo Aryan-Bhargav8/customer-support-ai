@@ -1,10 +1,8 @@
 'use client';
 
 import { Box, Typography, Button, AppBar, Toolbar, IconButton, Avatar } from '@mui/material';
-
 import { signInWithGoogle } from "../firebase";
 import { useRouter } from "next/navigation";
-
 
 export default function LandingPage() {
   const router = useRouter();
@@ -17,10 +15,10 @@ export default function LandingPage() {
       console.error("Error signing in with Google: ", error);
     }
   };
+
   const handleGetStarted = () => {
     router.push('/Chat');
   };
-
 
   return (
     <Box
@@ -46,7 +44,7 @@ export default function LandingPage() {
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
           color: 'white',
-          padding: '20px', // Added padding for smaller screens
+          padding: '20px',
         }}
       >
         <AppBar
@@ -54,12 +52,12 @@ export default function LandingPage() {
           elevation={0}
           sx={{
             backgroundColor: 'transparent',
-            padding: { xs: '5px 10px', md: '10px 20px' }, // Responsive padding
+            padding: { xs: '5px 10px', md: '10px 20px' },
           }}
         >
           <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Box sx={{ position: 'absolute', display: 'flex', alignItems: 'center' }}>
-              <Avatar src="/logo.jpg" alt="logo" sx={{ width: { xs: 40, md: 56 }, height: { xs: 40, md: 56 } }} />  {/* Responsive Avatar */}
+              <Avatar src="/logo.jpg" alt="logo" sx={{ width: { xs: 40, md: 56 }, height: { xs: 40, md: 56 } }} />
               <IconButton
                 edge="start"
                 color="inherit"
@@ -67,46 +65,43 @@ export default function LandingPage() {
                 sx={{
                   mr: 2,
                   fontFamily: 'poppins',
-                  padding: { xs: '10px', md: '20px' }, // Responsive padding
-                  fontSize: { xs: '1rem', md: '1.25rem' }, // Responsive font size
+                  padding: { xs: '10px', md: '20px' },
+                  fontSize: { xs: '1rem', md: '1.25rem' },
                 }}
               >
                 SupportIQ
               </IconButton>
             </Box>
-            <Box sx={{  position: 'absolute', top: 20, right: 20, display: 'flex', alignItems: 'center' ,bgcolor:'#6F9DFF', borderRadius:'20px'}}>
-            <Button
-            variant="contained"
-            color="success"
-            size="large"
-            onClick={handleGoogleSignIn}
-            sx={{
-              fontFamily: 'Quicksand',
-              backgroundColor: '#6F9DFF',
-              color: '#c0fcf8',
-              position: 'relative',
-              bottom: '5px',
-              border: '0.5px solid black',
-              boxShadow: '0px 4px 4px transparent',
-              transition: 'bottom 0.2s ease-in-out',
-              '&:hover': {
-                backgroundColor: '#9980ff',
-                bottom: '0px',
-                color: '#efd7fa',
-              },
-              ':active': {
-                bottom: '-2px',
-              },
-              padding: '5px 10px',
-              borderRadius: '20px',
-              fontSize: '20px',
-              fontWeight: 'bold',
-              display: 'block',
-            }}
-          >
-            sign in 
-          </Button>
-       
+            <Box sx={{ position: 'absolute', top: 20, right: 20, bgcolor: '#6F9DFF', borderRadius: '20px' }}>
+              <Button
+                variant="contained"
+                color="success"
+                size="large"
+                onClick={handleGoogleSignIn}
+                sx={{
+                  fontFamily: 'Quicksand',
+                  backgroundColor: '#6F9DFF',
+                  color: '#c0fcf8',
+                  padding: '5px 10px',
+                  border: '0.5px solid black',
+                  borderRadius: '20px',
+                  fontSize: '20px',
+                  fontWeight: 'bold',
+                  boxShadow: '0px 4px 4px transparent',
+                  transform: 'translateY(-5px)',
+                  transition: 'transform 0.2s ease-in-out, background-color 0.2s ease-in-out',
+                  '&:hover': {
+                    backgroundColor: '#9980ff',
+                    color: '#efd7fa',
+                    transform: 'translateY(-1px)',
+                  },
+                  '&:active': {
+                    transform: 'translateY(1px)',
+                  },
+                }}
+              >
+                Sign In
+              </Button>
             </Box>
           </Toolbar>
         </AppBar>
@@ -121,7 +116,7 @@ export default function LandingPage() {
           borderRadius={10}
           sx={{
             backdropFilter: 'blur(10px)',
-            width: { xs: '100%', md: 'auto' }, // Full width on smaller screens
+            width: { xs: '100%', md: 'auto' },
           }}
         >
           <Typography
@@ -133,7 +128,7 @@ export default function LandingPage() {
               fontFamily: 'Poppins',
               color: '#8bfcf5',
               textShadow: '3px 5px 1px #cc0c9c',
-              fontSize: { xs: '1.75rem', md: '2.5rem' }, // Responsive font size
+              fontSize: { xs: '1.75rem', md: '2.5rem' },
             }}
           >
             Welcome to SupportIQ:
@@ -147,7 +142,7 @@ export default function LandingPage() {
               fontFamily: 'Poppins',
               color: '#8bfcf5',
               textShadow: '3px 5px 1px #cc0c9c',
-              fontSize: { xs: '1.5rem', md: '2rem' }, // Responsive font size
+              fontSize: { xs: '1.5rem', md: '2rem' },
             }}
           >
             your all-knowing, always-on digital assistant!
@@ -161,7 +156,7 @@ export default function LandingPage() {
               textAlign: 'center',
               fontFamily: 'Poppins',
               color: '#8bfcf5',
-              fontSize: { xs: '1rem', md: '1.5rem' }, // Responsive font size
+              fontSize: { xs: '1rem', md: '1.5rem' },
               textShadow: '3px 5px 1px #cc0c9c',
             }}
           >
@@ -169,11 +164,10 @@ export default function LandingPage() {
             <br />
             designed to make your customer service experience seamless and efficient.
             <br /> Whether it&apos;s day or night.
-            <br />I am here to ensure you get the support you need.
+            <br /> I am here to ensure you get the support you need.
           </Typography>
         </Box>
 
-        {/* Button */}
         <Box
           sx={{
             border: '0.5px solid black',
@@ -190,24 +184,21 @@ export default function LandingPage() {
               fontFamily: 'Quicksand',
               backgroundColor: '#6F9DFF',
               color: '#c0fcf8',
-              position: 'relative',
-              bottom: '5px',
-              padding: { xs: '8px 16px', md: '10px 20px' }, // Responsive padding
+              padding: { xs: '8px 16px', md: '10px 20px' },
               border: '0.5px solid black',
               borderRadius: '20px',
-              fontSize: { xs: '16px', md: '20px' }, // Responsive font size
+              fontSize: { xs: '16px', md: '20px' },
               fontWeight: 'bold',
-              display: 'block',
               boxShadow: '0px 4px 4px transparent',
-              transition: 'bottom 0.2s ease-in-out',
-
+              transform: 'translateY(-5px)',
+              transition: 'transform 0.2s ease-in-out, background-color 0.2s ease-in-out',
               '&:hover': {
                 backgroundColor: '#9980ff',
-                bottom: '0px',
                 color: '#efd7fa',
+                transform: 'translateY(-1px)',
               },
               '&:active': {
-                bottom: '-2px',
+                transform: 'translateY(1px)',
               },
             }}
           >
