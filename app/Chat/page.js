@@ -154,11 +154,11 @@ export default function Home() {
       justifyContent="center"
       alignItems="center"
       sx={{
-        backgroundImage: 'url(1.gif)',
+        backgroundImage: 'url(2.gif)',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        padding: '20px', // Added padding for mobile devices
+        backgroundSize: 'cover', 
+          padding: '20px', // Added padding for mobile devices
       }}
     >
       <Stack
