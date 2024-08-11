@@ -174,16 +174,23 @@ export default function Home() {
             </Box>
           ))}
         </Stack>
-        <Stack direction="row" spacing={2}>
-          <TextField
+        <Stack
+          direction={"row"}
+          spacing={2}
+        >
+          <TextField 
             label="Enter your doubts here..."
             fullWidth
-            variant="filled"
+            variant='outlined'
             sx={{
               bgcolor: 'white',
-              borderRadius: 5,
-              fontFamily: 'Poppins',
-              fontSize: { xs: '14px', sm: '16px' }, // Responsive font size
+              fontFamily:'Poppins',
+              flexGrow: 1, 
+              borderRadius: '24px',
+              
+            }}
+            InputProps={{
+              style: { borderRadius: '24px' },
             }}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
