@@ -31,6 +31,10 @@ export default function LandingPage() {
       console.error("Error signing in with Google: ", error);
     }
   };
+  const handleGetStarted = () => {
+    router.push('/Chat');
+  };
+
 
   if (loading) {
     return <Typography>Loading...</Typography>; // Display loading state while checking authentication
@@ -87,6 +91,40 @@ export default function LandingPage() {
               >
                 SupportIQ
               </IconButton>
+            </Box>
+            <Box sx={{  position: 'absolute', top: 20, right: 20, display: 'flex', alignItems: 'center' ,bgcolor:'#6F9DFF', borderRadius:'20px'}}>
+            <Button
+            variant="contained"
+            color="success"
+            size="large"
+            onClick={handleGoogleSignIn}
+            sx={{
+              fontFamily: 'Quicksand',
+              backgroundColor: '#6F9DFF',
+              color: '#c0fcf8',
+              position: 'relative',
+              bottom: '5px',
+              border: '0.5px solid black',
+              boxShadow: '0px 4px 4px transparent',
+              transition: 'bottom 0.2s ease-in-out',
+              '&:hover': {
+                backgroundColor: '#9980ff',
+                bottom: '0px',
+                color: '#efd7fa',
+              },
+              ':active': {
+                bottom: '-2px',
+              },
+              padding: '5px 10px',
+              borderRadius: '20px',
+              fontSize: '20px',
+              fontWeight: 'bold',
+              display: 'block',
+            }}
+          >
+            sign in 
+          </Button>
+       
             </Box>
           </Toolbar>
         </AppBar>
@@ -156,18 +194,16 @@ export default function LandingPage() {
         {/* Button */}
         <Box
           sx={{
+            border: '0.5px solid black',
             borderRadius: '20px',
             backgroundColor: '#6F9DFF',
-            '&:hover': {
-              backgroundColor: '#9980ff',
-            },
           }}
         >
           <Button
             variant="contained"
             color="success"
             size="large"
-            onClick={handleGoogleSignIn}
+            onClick={handleGetStarted}
             sx={{
               fontFamily: 'Quicksand',
               backgroundColor: '#6F9DFF',
@@ -175,11 +211,13 @@ export default function LandingPage() {
               position: 'relative',
               bottom: '5px',
               padding: { xs: '8px 16px', md: '10px 20px' }, // Responsive padding
+              border: '0.5px solid black',
               borderRadius: '20px',
               fontSize: { xs: '16px', md: '20px' }, // Responsive font size
               fontWeight: 'bold',
               display: 'block',
-              transition: 'bottom 0.3s ease-in-out',
+              boxShadow: '0px 4px 4px transparent',
+              transition: 'bottom 0.2s ease-in-out',
 
               '&:hover': {
                 backgroundColor: '#9980ff',
