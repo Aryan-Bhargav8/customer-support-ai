@@ -271,17 +271,6 @@ export default function Home() {
             onKeyDown={handleKeyPress}
             disabled={isLoading}
           />
-          <Box
-           sx={{
-            borderRadius: 6,
-            fontFamily: 'Poppins',
-            backgroundColor: '#6F9DFF',
-            border: '1px solid black',
-            transition: 'background-color 0.2s ease-in-out',
-            '&:hover': {
-                backgroundColor: '#9980ff',
-              }
-            }}>
             <Button
             variant="contained"
             onClick={sendMessage}
@@ -292,15 +281,10 @@ export default function Home() {
               bgcolor: '#6F9DFF',
               padding: { xs: '8px', sm: '12px' }, // Responsive padding
               minWidth: '50px',
-              transform: 'translateY(-6px)',
+              transform: 'translateY(-2px)',
               border: '0.5px solid black',
               boxShadow: '0px 1px 1px transparent',
               transition: 'transform 0.2s ease-in-out, background-color 0.2s ease-in-out',
-              '&:hover': {
-                backgroundColor: '#9980ff',
-                color: '#efd7fa',
-                transform: 'translateY(-1px)',
-              },
               ':active': {
                 transform: 'translateY(1px)',
                 transition: 'transform 0.1s ease-in-out',
@@ -309,7 +293,6 @@ export default function Home() {
           >
             <Avatar src="/send.png" alt="send" sx={{ width: 24, height: 24 }} />
           </Button>
-          </Box>
 
         </Stack>
       </Stack>
