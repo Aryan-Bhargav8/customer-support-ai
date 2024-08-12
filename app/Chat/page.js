@@ -154,11 +154,11 @@ export default function Home() {
       justifyContent="center"
       alignItems="center"
       sx={{
-        backgroundImage: 'url(1.gif)',
+        backgroundImage: 'url(2.gif)',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        padding: '20px', // Added padding for mobile devices
+        backgroundSize: 'cover', 
+          padding: '20px', // Added padding for mobile devices
       }}
     >
       <Stack
@@ -206,7 +206,7 @@ export default function Home() {
               SupportIQ
             </IconButton>
           </Box>
-          <Button
+          <IconButton
             variant="outlined"
             color="error"
             onClick={handleLogout}
@@ -215,8 +215,8 @@ export default function Home() {
               textTransform: 'none',
             }}
           >
-            Logout
-          </Button>
+            <Avatar alt="logo" src="/close.png" sx={{ width: 46, height: 46 }} />
+          </IconButton>
         </Box>
         <Stack
           direction="column"

@@ -39,7 +39,7 @@ export default function LandingPage() {
         justifyContent="center"
         alignItems="center"
         sx={{
-          backgroundImage: 'url(1.gif)',
+          backgroundImage: 'url(2.gif)',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
@@ -60,7 +60,7 @@ export default function LandingPage() {
               <Avatar src="/logo.jpg" alt="logo" sx={{ width: { xs: 40, md: 56 }, height: { xs: 40, md: 56 } }} />
               <IconButton
                 edge="start"
-                color="inherit"
+                color="#00001a"
                 aria-label="logo"
                 sx={{
                   mr: 2,
@@ -75,13 +75,12 @@ export default function LandingPage() {
             <Box sx={{ position: 'absolute', top: 20, right: 20, bgcolor: '#6F9DFF', borderRadius: '20px' }}>
               <Button
                 variant="contained"
-                color="success"
                 size="large"
                 onClick={handleGoogleSignIn}
                 sx={{
                   fontFamily: 'Quicksand',
                   backgroundColor: '#6F9DFF',
-                  color: '#c0fcf8',
+                  color: ' #e7fefc',
                   padding: '5px 10px',
                   border: '0.5px solid black',
                   borderRadius: '20px',
@@ -120,13 +119,13 @@ export default function LandingPage() {
           }}
         >
           <Typography
-            variant="h2"
-            mb={2}
+            variant="h1"
+            mb={5}
             sx={{
               fontWeight: 'bold',
               textAlign: 'center',
               fontFamily: 'Poppins',
-              color: '#8bfcf5',
+              color: '#43002c',
               textShadow: '3px 5px 1px #cc0c9c',
               fontSize: { xs: '1.75rem', md: '2.5rem' },
             }}
@@ -140,8 +139,8 @@ export default function LandingPage() {
               fontWeight: 'bold',
               textAlign: 'center',
               fontFamily: 'Poppins',
-              color: '#8bfcf5',
-              textShadow: '3px 5px 1px #cc0c9c',
+              color: '#43002c',
+             
               fontSize: { xs: '1.5rem', md: '2rem' },
             }}
           >
@@ -155,9 +154,9 @@ export default function LandingPage() {
               fontWeight: 'bold',
               textAlign: 'center',
               fontFamily: 'Poppins',
-              color: '#8bfcf5',
+              color: '#43002c',
               fontSize: { xs: '1rem', md: '1.5rem' },
-              textShadow: '3px 5px 1px #cc0c9c',
+              
             }}
           >
             Think of me as your personal helper,
